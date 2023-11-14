@@ -1,5 +1,4 @@
 const apikey = "9eaad6777b71b9f5e067126eb775ffaa";
-
 const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
@@ -17,12 +16,12 @@ function addWeatherToPage(data) {
   const windSpeed = data.wind.speed;
 const ctx = document.getElementById('weather-chart').getContext('2d');
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: ['Temperature (°C)', 'Humidity (%)'],
+            labels: ['Temperature (°C)', 'Humidity (%)','windspeed(km/h)'],
             datasets: [{
                 label: 'Weather Info',
-                data: [temp, humidity],
+                data: [temp, humidity,windSpeed],
                 backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
                 borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
                 borderWidth: 1
@@ -50,9 +49,8 @@ const ctx = document.getElementById('weather-chart').getContext('2d');
         <p>Wind speed : <span>${+Math.trunc(windSpeed * 3.16)}km/h</span></p>
         </div>
     `;
-  // cleanup
+// cleanup
   main.innerHTML = "";
-
   main.appendChild(weather);
 }
 function KtoC(K) {
@@ -60,9 +58,7 @@ function KtoC(K) {
 }
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const city = search.value;
-
   if (city) {
     getWeatherByLocation(city);
   }
